@@ -210,7 +210,7 @@ def test_https_stresstest():
     # Use np.isclose for floating point safety
     #assert np.isclose(result[0, 0], f_1)
     #assert np.isclose(result[143, 191], f_2)
-    print("✅ Stress test and validation passed!")
+    print("Stress test and validation passed!")
 
 def test_response_https(nChunks):
     """
@@ -263,18 +263,6 @@ def test_response_https(nChunks):
     
     result = active.min(axis=(0,1))[0: nChunks[0]*10,0:nChunks[1]*480, 0:nChunks[2]*640]
     
-    #(372, 96, 192)
-    #all_mins = []
-    #for i in range(0, 372, 10): 
-    #    chunk_min = active[i : i+10, :, :].min(axis=(0, 1))[:]
-    #    all_mins.append(chunk_min)
-
-    #print(all_mins)
-
-    #result = np.min(all_mins, axis=0)
-
-    #result = active.min()[0:20, 0:19, 0:144, 0:192]
-
     print("Result is", result)
     print("Result shape is", result.shape)
 
