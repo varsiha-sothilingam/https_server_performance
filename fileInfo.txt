@@ -1,0 +1,6 @@
+HTTPS uri.      https://gws-access.jasmin.ac.uk/public/canari/varsiha/ch330a.pc19790301-def.nc
+File:           ch330a.pc19790301-def.nc
+Dataset:        UM_m01s16i202_vn1106              
+Shape:          (40, 1920, 2560)                             
+Chunks per axis [4, 4, 4]                                    
+Chunks          64      
