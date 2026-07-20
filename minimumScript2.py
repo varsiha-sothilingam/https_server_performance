@@ -128,8 +128,6 @@ total_start = time.perf_counter()
 nWorkers = [1,2,5,10,15,20,25,30,40,50]
 setChunkSize = [1,2,3,4,5,6,7,8,9,10,20,25,30,35,40]
 
-
-
 #calling function to get random ranges not overlapping so we dont have cache issues for each randomly chosen chunk size
 results = {
     size: random_ranges(size)
