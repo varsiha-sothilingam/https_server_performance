@@ -13,16 +13,16 @@ import csv
 import logging
 
 # 1. Set up a basic console logger
-logging.basicConfig(level=logging.WARNING)
+#logging.basicConfig(level=logging.WARNING)
 
 # 2. Force fsspec and aiohttp to print detailed DEBUG logs
-logging.getLogger("fsspec").setLevel(logging.DEBUG)
-logging.getLogger("aiohttp.client").setLevel(logging.DEBUG)
+#logging.getLogger("fsspec").setLevel(logging.DEBUG)
+#logging.getLogger("aiohttp.client").setLevel(logging.DEBUG)
 
 
 #cl variable CEDA is 420 chunks of size 1, for 5 requests, do chunk size of 85 to avoid any cache overlap
 ARRAY_SIZE = 420
-NREQUESTS = 10
+NREQUESTS = 15
 MAXCHUNKSIZE = int(ARRAY_SIZE/NREQUESTS)
 print(MAXCHUNKSIZE)
 
@@ -122,11 +122,10 @@ ds_var = file_obj[config['var']]
 total_start = time.perf_counter()
 
 #cl variable is 420 chunks of size 1, for 20 requests, do chunk size of 21 to avoid any cache overlap
-#nWorkers = [1,2,5,10,15,20,25,30,40,50]
+nWorkers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]#,20]#,25,30,40,50]
 #setChunkSize = [1,2,3,4,5,6,7,8,9,10,20,25,30,35,40]
 
-nWorkers = [1,2,5,10,15,20,25,30,40,50]
-setChunkSize = [1,2,3,4,5,6,7,8,9,10,20,25,30,35,40]
+setChunkSize = [5]#,2,3,4,5,6,7,8,9,10,20,25,30,35,40]
 
 #calling function to get random ranges not overlapping so we dont have cache issues for each randomly chosen chunk size
 results = {
