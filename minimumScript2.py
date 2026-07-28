@@ -7,7 +7,7 @@ from aiohttp import ClientResponseError # Import to catch the specific HTTP erro
 from datetime import datetime
 import random 
 import csv
-
+import uuid
 
 
 import logging
@@ -19,26 +19,103 @@ import logging
 #logging.getLogger("fsspec").setLevel(logging.DEBUG)
 #logging.getLogger("aiohttp.client").setLevel(logging.DEBUG)
 
+import asyncio
+import aiohttp
 
 #cl variable CEDA is 420 chunks of size 1, for 5 requests, do chunk size of 85 to avoid any cache overlap
 ARRAY_SIZE = 420
-NREQUESTS = 15
+NREQUESTS = 20
 MAXCHUNKSIZE = int(ARRAY_SIZE/NREQUESTS)
 print(MAXCHUNKSIZE)
+class RequestTracker:
+    def __init__(self):
+        self.http_records = []
+        self._pending_requests = {}  # Maps params ID -> internal tracking dict
+        self._lock = asyncio.Lock()
 
+    async def on_request_start(self, session, trace_config_ctx, params):
+        clock_now = datetime.now().strftime("%d/%b/%Y:%H:%M:%S.%f")
+        t_start = time.perf_counter()
+        
+        # 1. Extract bytes range requested
+        bytes_range = params.headers.get("Range", "Full-File")
+        
+        # 2. Check if client sent an explicit request ID header, or generate a unique tracking ID
+        client_req_id = params.headers.get("X-Request-ID", str(uuid.uuid4())[:8])
+        
+        async with self._lock:
+            # Store pending request state mapped to the unique params instance key
+            self._pending_requests[id(params)] = {
+                "internal_id": client_req_id,
+                "start_clock": clock_now,
+                "t_start": t_start,
+                "bytes_range": bytes_range
+            }
+
+    async def on_request_end(self, session, trace_config_ctx, params):
+        t_end = time.perf_counter()
+        
+        async with self._lock:
+            # Match the ending request to its start data using id(params)
+            pending_data = self._pending_requests.pop(id(params), None)
+            
+            if pending_data:
+                # 3. Extract the server's response headers
+                response_headers = params.response.headers if params.response else {}
+                
+                # Check standard server-side ID headers (X-Request-ID, X-Correlation-ID, etc.)
+                server_req_id = (
+                    response_headers.get("X-Request-ID") or 
+                    response_headers.get("X-Correlation-ID") or 
+                    response_headers.get("X-Server-Request-Id") or 
+                    pending_data["internal_id"]  # Fallback to client-generated ID
+                )
+                
+                # Verify match condition
+                is_matched = (pending_data["internal_id"] == server_req_id) or (server_req_id != "Unknown")
+                
+                latency = t_end - pending_data["t_start"]
+                
+                # Record correlated request payload
+                self.http_records.append({
+                    "request_id": server_req_id,
+                    "matched": is_matched,
+                    "start_clock": pending_data["start_clock"],
+                    "slice_latency": latency,
+                    "bytes_range": pending_data["bytes_range"],
+                    "http_status": params.response.status if params.response else 0
+                })
+
+
+#def load_from_https(uri):
+#    async def get_session(**kwargs):
+#        return aiohttp.ClientSession(trace_configs=[trace_config], **kwargs)
+#    client_kwargs = {
+#        'get_client': get_session,
+#        'auth': None
+#    }
+#
+#    
+#    fs = fsspec.filesystem('http', **client_kwargs)
+#    http_file = fs.open(uri, 'rb')
+#    
+#    ds = pyfive.File(http_file)
+#    print(f"Dataset reference established: {uri}")
+#    
+#    return ds
 
 def load_from_https(uri):
-    """
-    opening https file from uri using fsspec and pyfive
-    """
-    client_kwargs = {'auth': None}
-    fs = fsspec.filesystem('http', **client_kwargs)
-    http_file = fs.open(uri, 'rb')
-    
-    # We pass the raw http_file to pyfive; it will lazily read slices later
-    ds = pyfive.File(http_file)
-    print(f"Dataset reference established: {uri}")
-    return ds
+   """
+   opening https file from uri using fsspec and pyfive
+   """
+   client_kwargs = {'auth': None}
+   fs = fsspec.filesystem('http', **client_kwargs)
+   http_file = fs.open(uri, 'rb')
+   
+   # We pass the raw http_file to pyfive; it will lazily read slices later
+   ds = pyfive.File(http_file)
+   print(f"Dataset reference established: {uri}")
+   return ds
 
 
 def _iterate_range_slice(ds_var, start_idx, end_idx):
@@ -47,19 +124,60 @@ def _iterate_range_slice(ds_var, start_idx, end_idx):
     """
 
     start_time = time.perf_counter()
+    start_clock = datetime.now().strftime("%d/%b/%Y:%H:%M:%S.%f")
     try:
         # Request a precise block size (chunk_size)
         data = ds_var[start_idx : end_idx] 
         latency = time.perf_counter() - start_time
         end_clock = datetime.now().strftime("%d/%b/%Y:%H:%M:%S.%f")   
-        return {"status": "success", "latency": latency, "index": start_idx, "end-clock": end_clock}
+        return {"status": "success", "slice_latency": latency, "index": start_idx,"start-clock":start_clock,  "end-clock": end_clock}
     except Exception as exc:
         latency = time.perf_counter() - start_time
         end_clock = datetime.now().strftime("%d/%b/%Y:%H:%M:%S.%f")   
         error_cause = exc.__cause__ if hasattr(exc, '__cause__') else exc
         error_msg = f"HTTP {error_cause.status}" if isinstance(error_cause, ClientResponseError) else str(exc)
-        return {"status": "failed", "error": error_msg, "latency": latency, "index": start_idx, "end-clock": end_clock}
+        return {"status": "failed", "error": error_msg, "slice_latency": latency, "index": start_idx,"start-clock":start_clock, "end-clock": end_clock}
 
+#def _iterate_range_slice(ds_var, start_idx, end_idx, tracker):
+#    start_time = time.perf_counter()
+#    start_clock = datetime.now().strftime("%d/%b/%Y:%H:%M:%S.%f")
+#    
+#    # Snapshot position in request records before slicing
+#    initial_rec_idx = len(tracker.http_records)
+#    
+#    try:
+#        data = ds_var[start_idx : end_idx] 
+#        total_slice_latency = time.perf_counter() - start_time
+#        end_clock = datetime.now().strftime("%d/%b/%Y:%H:%M:%S.%f")   
+#        
+#        # Extract HTTP records recorded specifically during this slice
+#        slice_requests = tracker.http_records[initial_rec_idx:]
+#        
+#        return {
+#            "status": "success", 
+#            "slice_latency": total_slice_latency, 
+#            "index": start_idx, 
+#            "start-clock": start_clock,
+#            "end-clock": end_clock,
+#            "http_request_count": len(slice_requests),
+#            "http_requests": slice_requests  # List of dicts: [{'start_clock': '...', 'latency': 0.12}, ...]
+#        }
+        
+ # except Exception as exc:
+ #     total_slice_latency = time.perf_counter() - start_time
+ #     end_clock = datetime.now().strftime("%d/%b/%Y:%H:%M:%S.%f")   
+ #     
+ #     error_cause = exc.__cause__ if hasattr(exc, '__cause__') else exc
+ #     error_msg = f"HTTP {error_cause.status}" if isinstance(error_cause, ClientResponseError) else str(exc)
+ #     
+ #     return {
+ #         "status": "failed", 
+ #         "error": error_msg, 
+ #         "slice_latency": total_slice_latency, 
+ #         "index": start_idx, 
+ #         "start-clock": start_clock,
+ #         "end-clock": end_clock,
+ #     }
 
 def random_ranges(chunk_size):
     gap = ARRAY_SIZE - NREQUESTS * chunk_size
@@ -108,7 +226,8 @@ csv_filename = f"performance_results_{current_test}_{datetime.now().strftime("%d
 # Write headers to CSV
 with open(csv_filename, mode='w', newline='') as f:
     writer = csv.writer(f)
-    writer.writerow(["maxWorkers", "chunkSize", "StartIndex", "Status", "Error",  "EndClock", "Latency"])
+    writer.writerow(["maxWorkers", "chunkSize", "StartIndex", "Status", "Error",  "StartClock", "EndClock","Slice_Latency"])
+
 
 
 config = servers[current_test]
@@ -122,10 +241,10 @@ ds_var = file_obj[config['var']]
 total_start = time.perf_counter()
 
 #cl variable is 420 chunks of size 1, for 20 requests, do chunk size of 21 to avoid any cache overlap
-nWorkers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]#,20]#,25,30,40,50]
+nWorkers = [15]#,2,3,4,5,15]#,6,7,8,9,10,11,12,13,14,15]#,20]#,25,30,40,50]
 #setChunkSize = [1,2,3,4,5,6,7,8,9,10,20,25,30,35,40]
 
-setChunkSize = [5]#,2,3,4,5,6,7,8,9,10,20,25,30,35,40]
+setChunkSize = [10]#,2,3,4,5,6,7,8,9,10,20,25,30,35,40]
 
 #calling function to get random ranges not overlapping so we dont have cache issues for each randomly chosen chunk size
 results = {
@@ -140,19 +259,21 @@ for chunk_size, ranges in results.items():
 for max_worker in nWorkers:
     for chunk_size, ranges in results.items():
         with concurrent.futures.ThreadPoolExecutor(max_workers=max_worker) as executor:
-            # Notice we pass ds_var explicitly to avoid relying on global scopes inside threads safely
-            #futures = {executor.submit(_iterate_range, ds_var, i): i for i in range(NREQUESTS)}
-            futures = [ executor.submit(_iterate_range_slice, ds_var, range[0], range[1]) 
-                        for range in ranges ]
+            # 1. Pass 'tracker' as an argument to each thread function
+            futures = [ 
+                executor.submit(_iterate_range_slice, ds_var, range[0], range[1]) 
+                for range in ranges 
+            ]
 
             print(futures)
             print(f"-- Results for maxWorkers={max_worker} and chunkSize={chunk_size} for {NREQUESTS} Requests --")
             for future in concurrent.futures.as_completed(futures):
-                #idx = futures[future]
                 try:
                     result = future.result()
+                    
                     if result["status"] == "success":
-                        print(f"Thread for range[{result['index']},{result['index']+chunk_size-1}] completed | Latency: {result['latency']:.4f}s | End-clock: {result['end-clock']}")
+                        print(f"Thread for range[{result['index']},{result['index']+chunk_size-1}] completed | Latency: {result['slice_latency']:.4f}s ")
+                        
                         with open(csv_filename, mode='a', newline='') as f:
                             writer = csv.writer(f)
                             writer.writerow([
@@ -161,12 +282,14 @@ for max_worker in nWorkers:
                                 result['index'],
                                 result["status"],
                                 "None",
+                                result['start-clock'],
                                 result['end-clock'],
-                                result['latency']
+                                f"{result['slice_latency']:.4f}"
                             ])
 
                     else:
-                        print(f"Thread for range[{result['index']},{result['index']+chunk_size-1}] completed  FAILED | Error: {result['error']} | Latency: {result['latency']:.4f}s | End-clock: {result['end-clock']}")
+                        print(f"Thread for range[{result['index']},{result['index']+chunk_size-1}] FAILED | Error: {result['error']} | Latency: {result['slice_latency']:.4f}s")
+                        
                         with open(csv_filename, mode='a', newline='') as f:
                             writer = csv.writer(f)
                             writer.writerow([
@@ -175,26 +298,25 @@ for max_worker in nWorkers:
                                 result['index'],
                                 result["status"],
                                 result['error'],
+                                result['start-clock'],
                                 result['end-clock'],
-                                result['latency']
+                                f"{result['slice_latency']:.4f}"
                             ])
+                            
                 except Exception as crash:
-                    print(f"Thread for range[{result['index']},{result['index']+chunk_size-1}] completed   completely crashed before returning result: {crash}")
+                    print(f"Thread for index range completely crashed before returning result: {crash}")
                     with open(csv_filename, mode='a', newline='') as f:
                         writer = csv.writer(f)
                         writer.writerow([
                             max_worker, 
                             chunk_size, 
-                            result['index'],
-                            result["status"],
-                            result['error'],
-                            result['end-clock'],
-                            result['latency']
+                            "Unknown",
+                            "crashed",
+                            str(crash),
+                            "None",
+                            "None",
+                            "None",
+                            0
                         ])
 
 print(f"--- Test Finished in {time.perf_counter() - total_start:.2f} seconds ---")
-
-
-
-
-
