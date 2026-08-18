@@ -1,13 +1,13 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+#import seaborn as sns
 import os
 
-output_dir = "saved_plots"
+output_dir = "saved_plots_tmp"
 
 # Set style for all plots
-sns.set_theme(style="whitegrid")
+#sns.set_theme(style="whitegrid")
 plt.rcParams['figure.figsize'] = (10, 6)
 
 
@@ -17,7 +17,8 @@ def load_and_clean_data(csv_path):
     Converts EndClock to datetime.
     """
     df = pd.read_csv(csv_path)
-    
+    print(df.columns.tolist())
+    print(df[[ 'EndClock']].head(20))
     # Clean string column spaces if any exist
     df.columns = df.columns.str.strip()
     
@@ -35,380 +36,329 @@ def save_and_close(filename):
     plt.savefig(pdf_path, bbox_inches='tight')
     plt.close()  # Vital to prevent RAM exhaustion
 
-# =====================================================================
-# 1. BASELINE & DISTRIBUTION PLOTS (1D)
-# =====================================================================
-
-def plot_PeakRequest_v_Latency(df):
-    """Plots peak concurrent request vs latency."""
-    plt.figure()
-    df_pass = df_benchmarks[df_benchmarks['Status'] == 'success'] 
-    print(len(df_pass ))
-
-    df_pass['peakRequests'] = df_pass['maxWorkers'] * df_pass['chunkSize']
-   
-
-    sns.scatterplot(
-        data=df_pass, 
-        x="peakRequests", 
-        y="Latency", 
-        palette="colorblind",
-        alpha=0.6,
-    )
-    #plt.xscale('log')
-    #plt.title("Disk Seek & Cache Profile (StartIndex vs. Latency)", fontsize=14, fontweight='bold')
-    plt.xlabel("Peak concurrent HTTPS Requests")
-    plt.ylabel("Latency (seconds)")
-    plt.tight_layout()
-    save_and_close("peakRequest_v_Latency")
-
-def plot_TotalRequest_v_Latency(df):
-    """Plots peak concurrent request vs latency."""
-
-    # 1. Filter for only successful runs
-    df_success = df[df['Status'] == 'success'].copy()
-
-    # 2. Group by the test parameters and count the number of successful futures (rows)
-    # We use .size() to get the row count for each unique combination
-    grouped = df_success.groupby(['maxWorkers', 'chunkSize']).size().reset_index(name='successful_futures')
-
-    # 3. Calculate Total HTTPS Requests
-    # (Number of successful futures * chunkSize)
-    grouped['total_http_requests'] = grouped['successful_futures'] * grouped['chunkSize']
-    
-
-    sns.scatterplot(
-        x=grouped["total_http_requests"], 
-        y=df_success["Latency"], 
-        palette="colorblind",
-        alpha=0.6
-    )
-    #plt.xscale('log')
-    #plt.title("Disk Seek & Cache Profile (StartIndex vs. Latency)", fontsize=14, fontweight='bold')
-    plt.xlabel("Total HTTPS Requests")
-    plt.ylabel("Latency (seconds)")
-    plt.tight_layout()
-    save_and_close("TotalRequest_v_Latency")
 
 
 
-def plot_latency_distribution(df):
-    """Plots a histogram distribution of request latencies."""
-    
-    # Filter for anything that is NOT a success   
-    #df_failed = df_benchmarks[df_benchmarks['Status'] != 'success'] 
-    # Calculate the average latency of ONLY successful runs
-    #avg_success_latency = df_benchmarks[df_benchmarks['Status'] == 'success']['Latency'].mean()
-    #print(f"Average Success Latency: {avg_success_latency:.4f} seconds")
+def plot_latency(df_serv1,df_serv2, chunk_size):
+    """
+    Plot the average latency for a given chunk size and max workers.
 
-    # Count how many total failures occurred
-    #total_failures = len(df_benchmarks[df_benchmarks['Status'] != 'success'])
-    #print(f"Total Failed Requests: {total_failures}")
-     #maxWorkers,chunkSize,
+    Parameters
+    ----------
+    csv_file : str
+        Path to the CSV file.
+    chunk_size : int
+        Chunk size to filter on.
+    max_workers : int
+        Max workers value to filter on.
+    """
 
-    #df_pass = df[(df['Status'] == 'success') and (df['maxWorkers'] == 1) and (df['chunkSize'] == 1) ] 
-    # Filter using multiple exact conditions
-    filtered_df = df_benchmarks[
-    (df_benchmarks['chunkSize'] == 1) & 
-    (df_benchmarks['Status'] == 'success')
+    # Filter rows
+    # Filter rows
+    filtered_serv1 = df_serv1[
+        (df_serv1["chunkSize"] == chunk_size) &
+        (df_serv1["Status"] == "success")
     ]
-    
-    plt.figure()
-    
-    # Filter to plot successful and failed requests together/separately
-    sns.histplot(
-        data=filtered_df, 
-        x="Latency", 
-        hue="Status", 
-        kde=True, 
-        bins=30, 
-        palette="viridis",
-        multiple="stack"
+
+    filtered_serv2 = df_serv2[
+        (df_serv2["chunkSize"] == chunk_size) &
+        (df_serv2["Status"] == "success")
+    ]
+
+    if filtered_serv1.empty:
+        print("No matching data found.")
+        return
+
+ 
+
+    # Plot
+    plt.figure(figsize=(7, 5))
+    plt.scatter(
+        filtered_serv1["maxWorkers"],
+        filtered_serv1["Slice_Latency"],
+        marker="o",
+        color="steelblue",
+        label="CEDA"
     )
-    
-    plt.title("Latency Distribution Profile", fontsize=14, fontweight='bold')
-    plt.xlabel("Latency (seconds)")
-    plt.ylabel("Request Count")
+    plt.scatter(
+        filtered_serv2["maxWorkers"],
+        filtered_serv2["Slice_Latency"],
+        marker="o",
+        color="red",
+        label="DKRZ"
+    )
+
+    plt.xlabel("Max Workers")
+    plt.ylabel(" Latency (s)")
+    plt.title(f" Latency vs Max Workers\n Slice Size={chunk_size}")
+
+    plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    save_and_close("latency_distribution-11")
+    save_and_close("Latency_v_maxWorkers")
 
 
-def plot_chronological_latency(df):
-    """Plots request latency over time to identify startup jitter vs steady state."""
-    plt.figure()
-    df_pass = df[df['Status'] == 'success'] 
-    # Sort by execution time to ensure sequential plotting
-    df_sorted = df_pass.sort_values('EndClock')
-    
-    sns.scatterplot(
-        data=df_sorted, 
-        x="EndClock", 
-        y="Latency", 
-        hue="maxWorkers",
-        palette="colorblind",
-        alpha=0.7
-    )
-    
-    plt.title("Latency Over Time (Chronological Order)", fontsize=14, fontweight='bold')
-    plt.xlabel("Timestamp (EndClock)")
-    plt.ylabel("Latency (seconds)")
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    save_and_close("chronological_latency")
-
-
-def plot_chronological_latency_maxOne(df):
-    """Plots request latency over time to identify startup jitter vs steady state."""
-    plt.figure()
-    df_pass_tmp = df[df['Status'] == 'success'] 
-    df_pass     = df_pass_tmp[df_pass_tmp['maxWorkers'] == 1] 
-    # Sort by execution time to ensure sequential plotting
-    df_sorted = df_pass.sort_values('EndClock')
-    
-    sns.scatterplot(
-        data=df_sorted, 
-        x="EndClock", 
-        y="Latency", 
-        hue="chunkSize",
-        palette="colorblind",
-        alpha=0.7
-    )
-    
-    plt.title("Latency Over Time (Chronological Order)", fontsize=14, fontweight='bold')
-    plt.xlabel("Timestamp (EndClock)")
-    plt.ylabel("Latency (seconds)")
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    save_and_close("chronological_latency-maxOne")
-
-
-def plot_error_frequency(df):
-    """Plots a bar chart showing the frequency of different error statuses."""
-    plt.figure()
-    
-    # Fill NaN errors with 'None' for proper plotting
-    df_errors = df.copy()
-    df_errors['Error'] = df_errors['Error'].fillna('None')
-    
-    # Count occurrences
-    error_counts = df_errors['Error'].value_counts()
-    
-    sns.barplot(
-        x=error_counts.values, 
-        y=error_counts.index, 
-        palette="Reds_r"
-    )
-    
-    plt.title("Error Code Frequency", fontsize=14, fontweight='bold')
-    plt.xlabel("Count of Occurrences")
-    plt.ylabel("Error Type / Status")
-    plt.tight_layout()
-    save_and_close("error_frequency")
-
-
-# =====================================================================
-# 2. OPERATIONAL BOTTLENECK PLOTS (2D)
-# =====================================================================
-
-def plot_concurrency_vs_latency(df):
-    """Plots how changing max workers (concurrency) impacts latency."""
-    plt.figure()
-    
-    # Use only successful runs to keep latency measurements clean
-    df_success = df[df['Status'] == 'success']
-    
-    sns.lineplot(
-        data=df_success, 
-        x="maxWorkers", 
-        y="Latency", 
-        hue="chunkSize", 
-        marker="o", 
-        palette="crest"
-    )
-    
-    plt.title("Concurrency (Workers) vs. Latency", fontsize=14, fontweight='bold')
-    plt.xlabel("Max Workers (Concurrency)")
-    plt.ylabel("Latency (seconds)")
-    plt.tight_layout()
-    save_and_close("concurrency_vs_latency")
-
-
-def plot_chunk_size_vs_latency(df):
-    """Plots how changing chunk size (payload) impacts latency."""
-    plt.figure()
-    
-    df_success = df[df['Status'] == 'success']
-    
-    sns.lineplot(
-        data=df_success, 
-        x="chunkSize", 
-        y="Latency", 
-        hue="maxWorkers", 
-        marker="s", 
-        palette="colorblind",
-        errorbar=None
-    )
-
-    plt.title("Chunk Size vs. Latency", fontsize=14, fontweight='bold')
-    plt.yscale('log')
-    plt.xlabel("Slice Range")
-    plt.ylabel("Latency (seconds)")
-    plt.tight_layout()
-    save_and_close("slicerange_vs_latency-log")
-
-
-def plot_disk_seek_cache(df):
-    """Plots StartIndex vs Latency to search for disk-seeking lag patterns."""
-    plt.figure()
-    
-    sns.scatterplot(
-        data=df, 
-        x="StartIndex", 
-        y="Latency", 
-        hue="maxWorkers", 
-        palette="viridis",
-        alpha=0.6
-    )
-    
-    plt.title("Disk Seek & Cache Profile (StartIndex vs. Latency)", fontsize=14, fontweight='bold')
-    plt.xlabel("StartIndex (Data Coordinate Position)")
-    plt.ylabel("Latency (seconds)")
-    plt.tight_layout()
-    save_and_close("disk_seek_cache")
-
-
-# =====================================================================
-# 3. ADVANCED CORRELATION & MATRIX PLOTS
-# =====================================================================
-
-def plot_average_latency_heatmap(df):
-    """Generates a matrix heatmap correlating chunkSize, maxWorkers, and Mean Latency."""
-    plt.figure(figsize=(10, 8))
-    
-    df_success = df[df['Status'] == 'success']
-    
-    # Pivot to create index/column layout for heatmap
-    matrix_data = df_success.pivot_table(
-        values="Latency", 
-        index="maxWorkers", 
-        columns="chunkSize", 
-        aggfunc=np.mean
-    )
-    
-    sns.heatmap(
-        matrix_data, 
-        annot=True, 
-        fmt=".4f", 
-        cmap="YlOrRd", 
-        cbar_kws={'label': 'Mean Latency (seconds)'}
-    )
-    
-    plt.title("Heatmap: Mean Latency across Workers vs. Chunk Size", fontsize=14, fontweight='bold')
-    plt.xlabel("Chunk Size")
-    plt.ylabel("Max Workers")
-    plt.tight_layout()
-    save_and_close("average_latency_heatmap")
-
-
-def plot_throughput_matrix(df, bytes_per_element=4):
+def plot_average_latency(df_serv1,df_serv2, chunk_size):
     """
-    Calculates dynamic Mbps throughput and plots it on a heatmap matrix.
-    Assumes float32 array elements (4 bytes per element) by default.
+    Plot the average latency for a given chunk size and max workers.
+
+    Parameters
+    ----------
+    csv_file : str
+        Path to the CSV file.
+    chunk_size : int
+        Chunk size to filter on.
+    max_workers : int
+        Max workers value to filter on.
     """
-    plt.figure(figsize=(10, 8))
-    
-    df_success = df[df['Status'] == 'success'].copy()
-    
-    # Formula: (chunkSize * bytes_per_element * 8 bits) / (Latency * 1,000,000 bits)
-    df_success['Throughput_Mbps'] = (
-        (df_success['chunkSize'] * bytes_per_element * 8) / 
-        (df_success['Latency'] * 1_000_000)
+
+    # Filter rows
+    filtered_serv1 = df_serv1[
+        (df_serv1["chunkSize"] == chunk_size) &
+        (df_serv1["Status"] == "success")
+    ]
+
+    filtered_serv2 = df_serv2[
+        (df_serv2["chunkSize"] == chunk_size) &
+        (df_serv2["Status"] == "success")
+    ]
+
+    if filtered_serv1.empty or filtered_serv2.empty:
+        print("No matching data found.")
+        return
+
+    # Average latency for each maxWorkers value
+
+    avg_latency_serv2 = (
+        filtered_serv2
+        .groupby("maxWorkers")["Slice_Latency"]
+        #.mean()
+        .agg(
+        mean="mean",
+        std="std",
+        count="count",
+        )
+        .reset_index()
+        .sort_values("maxWorkers")
     )
-    
-    matrix_data = df_success.pivot_table(
-        values="Throughput_Mbps", 
-        index="maxWorkers", 
-        columns="chunkSize", 
-        aggfunc=np.mean
+    avg_latency_serv1 = (
+        filtered_serv1
+        .groupby("maxWorkers")["Slice_Latency"]
+        .mean()
+        .reset_index()
+        .sort_values("maxWorkers")
     )
-    
-    sns.heatmap(
-        matrix_data, 
-        annot=True, 
-        fmt=".2f", 
-        cmap="mako", 
-        cbar_kws={'label': 'Throughput (Mbps)'}
+    # Plot
+    plt.figure(figsize=(7, 5))
+    plt.plot(
+        avg_latency_serv1["maxWorkers"],
+        avg_latency_serv1["Slice_Latency"],
+        marker="o",
+        color="steelblue",
+        label="CEDA"
     )
-    
-    plt.title("Heatmap: Average Throughput (Mbps)", fontsize=14, fontweight='bold')
-    plt.xlabel("Chunk Size")
-    plt.ylabel("Max Workers")
+    plt.plot(
+        avg_latency_serv2["maxWorkers"],
+        avg_latency_serv2["Slice_Latency"],
+        marker="o",
+        color="red",
+        label="DKRZ"
+    )
+
+    plt.xlabel("Max Workers")
+    plt.ylabel("Average Latency (s)")
+    plt.title(f"Average Latency vs Max Workers\n Slice Size={chunk_size}")
+    plt.legend(loc="upper left")
+
+    plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    save_and_close("throughput_matrix")
+    save_and_close("AvgLatency_v_maxWorkers")
 
-def plot_failure_rate_matrix(df):
-    """Generates a matrix heatmap correlating the percentage of failed tasks."""
-    plt.figure(figsize=(10, 8))
+
+def plot_latency_vs_clock_time(df_CEDA, df_DKRZ, max_workers, fileName):
+    """
+    Plot latency vs clock time for a given max workers value.
     
-    # Map success/failure to 1/0 for average percentage calculation
-    df_fail = df.copy()
-    df_fail['Is_Failure'] = (df_fail['Status'] != 'success').astype(int) * 100
-    
-    matrix_data = df_fail.pivot_table(
-        values="Is_Failure", 
-        index="maxWorkers", 
-        columns="chunkSize", 
-        aggfunc=np.mean
+    Parameters
+    ----------
+    df_CEDA : pandas.DataFrame
+    df_DKRZ : pandas.DataFrame
+    max_workers : int
+        Max workers value to filter on.
+    """
+
+    # Filter for selected max workers and successful requests
+    filtered_CEDA = df_CEDA[
+        (df_CEDA["maxWorkers"] == max_workers) &
+        (df_CEDA["Status"] == "success")
+    ].copy()
+
+    filtered_DKRZ = df_DKRZ[
+        (df_DKRZ["maxWorkers"] == max_workers) &
+        (df_DKRZ["Status"] == "success")
+    ].copy()
+
+    if filtered_CEDA.empty and filtered_DKRZ.empty:
+        print("No matching data found.")
+        return
+
+    # Sort by time
+    filtered_CEDA = filtered_CEDA.sort_values("EndClock")
+    filtered_DKRZ = filtered_DKRZ.sort_values("EndClock")
+
+    # Create side-by-side subplots
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5), sharey=True)
+
+    # CEDA plot
+    axes[0].plot(
+        filtered_CEDA["EndClock"],
+        filtered_CEDA["Slice_Latency"],
+        marker="o",
+        linestyle="-",
+        color="steelblue",
     )
-    
-    sns.heatmap(
-        matrix_data, 
-        annot=True, 
-        fmt=".1f", 
-        cmap="Reds", 
-        cbar_kws={'label': 'Failure Rate (%)'}
+    axes[0].set_title("CEDA")
+    axes[0].set_xlabel("Clock Time")
+    axes[0].set_ylabel("Latency (s)")
+    axes[0].tick_params(axis="x", rotation=45)
+    axes[0].grid(True, alpha=0.3)
+
+    # DKRZ plot
+    axes[1].plot(
+        filtered_DKRZ["EndClock"],
+        filtered_DKRZ["Slice_Latency"],
+        marker="o",
+        linestyle="-",
+        color="red",
     )
-    
-    plt.title("Heatmap: Request Failure Rate (%)", fontsize=14, fontweight='bold')
-    plt.xlabel("Chunk Size")
-    plt.ylabel("Max Workers")
+    axes[1].set_title("DKRZ")
+    axes[1].set_xlabel("Clock Time")
+    axes[1].tick_params(axis="x", rotation=45)
+    axes[1].grid(True, alpha=0.3)
+
+    # Overall figure title
+    fig.suptitle(f"Latency vs Clock Time (Max Workers = {max_workers})")
+
     plt.tight_layout()
-    save_and_close("failure_rate_matrix")
+    save_and_close(fileName)
 
 
+
+import matplotlib.dates as mdates
+
+
+def plot_latency_heatmap(df, site_name, bin_size="1ms"):
+    """
+    Heatmap of mean latency over time for each maxWorkers value.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Must contain EndClock, Latency, maxWorkers, Status.
+    site_name : str
+        Title for the plot.
+    bin_size : str
+        Time bin size (e.g. '5s', '10s', '30s', '1min').
+    """
+
+    # Keep successful requests
+    df = df[df["Status"] == "success"].copy()
+
+    # Ensure datetime
+    df["EndClock"] = pd.to_datetime(df["EndClock"])
+
+    # Bin the times
+    df["TimeBin"] = df["EndClock"].dt.floor(bin_size)
+
+    # Pivot table: rows=workers, cols=time bins
+    heatmap = df.pivot_table(
+        index="maxWorkers",
+        columns="TimeBin",
+        values="Slice_Latency",
+        aggfunc="mean"
+    )
+
+    fig, ax = plt.subplots(figsize=(12, 5))
+
+    im = ax.imshow(
+        heatmap.values,
+        aspect="auto",
+        origin="lower",
+        cmap="viridis"
+    )
+
+    # Tick labels
+    ax.set_yticks(range(len(heatmap.index)))
+    ax.set_yticklabels(heatmap.index)
+
+    ax.set_xticks(range(len(heatmap.columns)))
+    ax.set_xticklabels(
+        [t.strftime("%H:%M:%S") for t in heatmap.columns],
+        rotation=45,
+        ha="right"
+    )
+
+    ax.set_xlabel("Clock Time")
+    ax.set_ylabel("Max Workers")
+    ax.set_title(f"{site_name}: Mean Latency Heatmap")
+
+    cbar = fig.colorbar(im, ax=ax)
+    cbar.set_label("Mean Latency (s)")
+
+    plt.tight_layout()
+    save_and_close("heatmap-tmp")
 # =====================================================================
 # SCRIPT EXECUTION
 # =====================================================================
 
 if __name__ == "__main__":
     # Change "your_data_file.csv" to the path of your benchmark CSV
-    csv_file_path = "/home/users/varsiha/http_server_perf/performance_results_CEDA_15Jul2026111142.csv"
     
+    #csv_file_path = "/home/users/varsiha/http_server_perf/performance_results_CEDA_15Jul2026111142.csv"
+    csv_file_path = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_CEDA_21Jul2026113832.csv"
+    csv_file_path_CEDA = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_CEDA_21Jul2026115339.csv"
+    csv_file_path_CEDA = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_CEDA_21Jul2026171131.csv"
+
+
+    csv_file_path_CEDA = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_CEDA_22Jul2026170658.csv" 
+    csv_file_path_CEDA = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_CEDA_24Jul2026124446.csv"
+
+    #csv_file_path_CEDA = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_CEDA_22Jul2026172241.csv"
+    #csv_file_path_DKRZ = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_DKRZ_21Jul2026142245.csv"
+    #csv_file_path_DKRZ = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_DKRZ_21Jul2026151136.csv"
+    csv_file_path_DKRZ = "/Users/dh935740@reading.ac.uk/https_server_performance/performance_results_DKRZ_21Jul2026170111.csv"
+    csv_file_path_DKRZ = "//Users/dh935740@reading.ac.uk/https_server_performance/performance_results_DKRZ_24Jul2026123537.csv"
     try:
         # Load and clean
-        df_benchmarks = load_and_clean_data(csv_file_path)
+        df_benchmarks_CEDA = load_and_clean_data(csv_file_path_CEDA)
+        df_benchmarks_DKRZ = load_and_clean_data(csv_file_path_DKRZ)
         
-        plot_PeakRequest_v_Latency(df_benchmarks)
-        plot_TotalRequest_v_Latency(df_benchmarks)
-        plot_chunk_size_vs_latency(df_benchmarks)
-        plot_chronological_latency(df_benchmarks)
-        plot_chronological_latency_maxOne(df_benchmarks)
-        """
-        # Run 1D distributions
-        plot_latency_distribution(df_benchmarks)
-        plot_chronological_latency(df_benchmarks)
-        plot_error_frequency(df_benchmarks)
+        #Plot
+
+        #plot_average_latency(df_benchmarks_CEDA, df_benchmarks_DKRZ , 5)
+        #plot_latency(df_benchmarks_CEDA, df_benchmarks_DKRZ, 5)
         
-        # Run 2D Bottleneck checks
-        plot_concurrency_vs_latency(df_benchmarks)
-        
-        plot_disk_seek_cache(df_benchmarks)
-        
-        # Run advanced analysis matrices
-        plot_average_latency_heatmap(df_benchmarks)
-        plot_throughput_matrix(df_benchmarks, bytes_per_element=4)  # change element bytes if needed
-        plot_failure_rate_matrix(df_benchmarks)
-        """
+        plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ, 15, "Latency_v_Clock-15Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ, 14, "Latency_v_Clock-14Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ, 13, "Latency_v_Clock-13Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ, 12, "Latency_v_Clock-12Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ, 11, "Latency_v_Clock-11Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ, 10, "Latency_v_Clock-10Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ,  9, "Latency_v_Clock-9Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ,  8, "Latency_v_Clock-8Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ,  7, "Latency_v_Clock-7Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ,  6, "Latency_v_Clock-6Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ,  5, "Latency_v_Clock-5Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ,  2, "Latency_v_Clock-2Workers")
+        #plot_latency_vs_clock_time(df_benchmarks_CEDA,df_benchmarks_DKRZ,  1, "Latency_v_Clock-1Workers")
+
+        #plot_latency_heatmap(df_benchmarks_DKRZ, "DKRZ", bin_size="1ms")
+
+        #plot_PeakRequest_v_Latency(df_benchmarks)
+        #plot_TotalRequest_v_Latency(df_benchmarks)
+        #plot_chunk_size_vs_latency(df_benchmarks)
+        #plot_chronological_latency(df_benchmarks)
+        #plot_chronological_latency_maxOne(df_benchmarks)
+
 
     except FileNotFoundError:
-        print(f"Error: Could not find '{csv_file_path}'. Check your path directory string.")
+        print(f"Error: Could not find '{csv_file_path_CEDA}'. Check your path directory string.")

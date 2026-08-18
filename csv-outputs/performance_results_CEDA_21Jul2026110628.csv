@@ -1,0 +1,61 @@
+maxWorkers,chunkSize,StartIndex,Status,Error,EndClock,Latency
+1,5,2,success,None,21/Jul/2026:11:06:53.014621,2.488835541997105
+1,5,103,success,None,21/Jul/2026:11:06:56.457225,3.441855167009635
+1,5,168,success,None,21/Jul/2026:11:07:00.339003,3.881137040996691
+1,5,206,success,None,21/Jul/2026:11:07:03.668595,3.3278437089757062
+1,5,282,success,None,21/Jul/2026:11:07:06.861116,3.191845708002802
+1,5,321,success,None,21/Jul/2026:11:07:09.358541,2.4969884580059443
+1,5,345,success,None,21/Jul/2026:11:07:11.651835,2.2920969999977387
+1,5,390,success,None,21/Jul/2026:11:07:16.628349,4.97607929201331
+1,5,407,success,None,21/Jul/2026:11:07:20.099712,3.470696875010617
+1,5,415,success,None,21/Jul/2026:11:07:23.900394,3.8000527919793967
+2,5,2,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:25.379302,1.476865957985865
+2,5,103,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:25.395016,1.4923240409989376
+2,5,168,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:26.145141,0.7654425000073388
+2,5,206,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:26.838302,1.443053749972023
+2,5,282,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:27.017272,0.8705805420177057
+2,5,321,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:27.335840,0.49710999999661
+2,5,345,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:27.403792,0.3860570410033688
+2,5,390,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:28.699062,1.3628544580133166
+2,5,407,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:28.969391,1.5651837910118047
+2,5,415,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:29.174351,0.47449400002369657
+5,5,103,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:30.190971,1.0145233329967596
+5,5,168,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:30.355993,1.1793163339898456
+5,5,345,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:30.617459,0.2610528329969384
+5,5,206,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:30.636259,1.4592769170121755
+5,5,282,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:31.024725,1.8474575000000186
+5,5,390,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:31.027082,0.40941529101110063
+5,5,321,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:31.043163,0.8517437500122469
+5,5,2,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:32.306442,3.1304282920027617
+5,5,407,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:32.318173,1.6816643330093939
+5,5,415,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:32.603579,1.5786158750124741
+10,5,2,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:33.786556,1.181076665990986
+10,5,282,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:33.866235,1.259942584001692
+10,5,103,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:34.035569,1.4298272090090904
+10,5,168,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:34.238193,1.6322504170238972
+10,5,206,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:34.438261,1.8321310410101432
+10,5,390,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:34.462726,1.8559200000017881
+10,5,321,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:34.538876,1.932436000002781
+10,5,345,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:34.623581,2.0169972919975407
+10,5,415,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:34.680045,2.07263349997811
+10,5,407,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:34.693583,2.0866110420029145
+15,5,206,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:35.342320,0.6467375420033932
+15,5,345,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:36.028823,1.3326159160060342
+15,5,390,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:36.101745,1.4053981250035577
+15,5,415,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:36.229301,1.5327121659938712
+15,5,168,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:36.254317,1.5589540409855545
+15,5,2,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:36.537913,1.8427919579844456
+15,5,407,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:36.916992,2.2205557500128634
+15,5,321,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:36.932960,2.237106542015681
+15,5,103,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:36.969827,2.2745772089983802
+15,5,282,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:37.016033,2.320281624997733
+20,5,2,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:37.639879,0.614539166999748
+20,5,321,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:37.912404,0.8863621249911375
+20,5,390,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:38.148632,1.1222827500023413
+20,5,345,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:38.497373,1.471200666972436
+20,5,168,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:38.710870,1.6852668329956941
+20,5,103,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:38.736751,1.7112591250042897
+20,5,407,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:38.761893,1.7354404169891495
+20,5,206,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:38.769780,1.7440964999841526
+20,5,282,failed,exceptions must derive from BaseException,21/Jul/2026:11:07:38.853198,1.8273235420056153
+20,5,415,success,None,21/Jul/2026:11:07:42.215594,5.18905579202692

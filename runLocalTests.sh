@@ -1,0 +1,1 @@
+python minimumScript.py  3>&1 1>>"output-cl_Amon_UKESM1-0-LL_esm-hist_r1i1p1f2_gn_185001-189912/ESGF-JASMIN-cl_Amon_UKESM1-0-LL_esm-hist_r1i1p1f2_gn_185001-189912-$(date +%Y%m%d-%H%M%S).output" 

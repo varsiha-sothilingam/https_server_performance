@@ -1,0 +1,21 @@
+maxWorkers,chunkSize,StartIndex,Status,Error,StartClock,EndClock,Slice_Latency
+15,10,260,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.702236,28/Jul/2026:10:53:50.626125,0.9239
+15,10,2,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.699729,28/Jul/2026:10:53:51.027869,1.3281
+15,10,280,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.702695,28/Jul/2026:10:53:51.786320,2.0836
+15,10,168,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.701251,28/Jul/2026:10:53:51.840307,2.1390
+15,10,70,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.700709,28/Jul/2026:10:53:51.938933,2.2382
+15,10,304,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.703080,28/Jul/2026:10:53:52.245265,2.5422
+15,10,120,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.700965,28/Jul/2026:10:53:52.334637,2.6337
+15,10,194,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.701450,28/Jul/2026:10:53:52.362485,2.6610
+15,10,330,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:50.626356,28/Jul/2026:10:53:52.420720,1.7944
+15,10,37,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.700321,28/Jul/2026:10:53:52.602720,2.9024
+15,10,240,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.701817,28/Jul/2026:10:53:52.945359,3.2435
+15,10,144,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.701100,28/Jul/2026:10:53:52.950345,3.2492
+15,10,227,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.701664,28/Jul/2026:10:53:53.060938,3.3593
+15,10,381,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:51.840546,28/Jul/2026:10:53:53.272459,1.4319
+15,10,53,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.700547,28/Jul/2026:10:53:53.358356,3.6578
+15,10,85,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.700842,28/Jul/2026:10:53:53.385201,3.6843
+15,10,316,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:49.703223,28/Jul/2026:10:53:53.495944,3.7927
+15,10,405,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:51.939197,28/Jul/2026:10:53:53.537583,1.5984
+15,10,365,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:51.786554,28/Jul/2026:10:53:53.625519,1.8390
+15,10,350,failed,Error -5 while decompressing data: incomplete or truncated stream,28/Jul/2026:10:53:51.028202,28/Jul/2026:10:53:53.640445,2.6122

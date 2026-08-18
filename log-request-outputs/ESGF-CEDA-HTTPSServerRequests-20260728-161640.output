@@ -1,0 +1,354 @@
+--- Running Test on CEDA ---
+Dataset reference established: https://esgf.ceda.ac.uk/thredds/fileServer/esg_cmip6/CMIP6/CMIP/MOHC/UKESM1-1-LL/piControl/r1i1p1f2/Amon/ta/gn/latest/ta_Amon_UKESM1-1-LL_piControl_r1i1p1f2_gn_274301-274912.nc
+28/Jul/2026:16:16:44.001358 36023398 Range=bytes=39176372-40067155
+28/Jul/2026:16:16:44.045826 36023398 Range=bytes=39176372-40067155 Recieved
+Thread for range[44,45] completed | maxWorkers: 1| Latency: 0.0535s 
+28/Jul/2026:16:16:44.054637 baa6d97c Range=bytes=56093313-56988215
+28/Jul/2026:16:16:44.099208 baa6d97c Range=bytes=56093313-56988215 Recieved
+Thread for range[63,64] completed | maxWorkers: 1| Latency: 0.0527s 
+Thread for range[95,96] completed | maxWorkers: 1| Latency: 0.0001s 
+Thread for range[100,101] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[108,109] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[113,114] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[136,137] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[149,150] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[166,167] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[179,180] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[200,201] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[210,211] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[220,221] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[229,230] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[239,240] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[250,251] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[255,256] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[266,267] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[308,309] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[318,319] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[328,329] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[337,338] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[373,374] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[406,407] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[411,412] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[414,415] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[417,418] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[422,423] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[426,427] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[452,453] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[507,508] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[512,513] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[533,534] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[537,538] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[563,564] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[594,595] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[600,601] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[610,611] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[613,614] completed | maxWorkers: 1| Latency: 0.0000s 
+Thread for range[618,619] completed | maxWorkers: 1| Latency: 0.0000s 
+28/Jul/2026:16:16:44.230501 a17fab51 Range=bytes=39176372-40067155
+28/Jul/2026:16:16:44.230729 669e4234 Range=bytes=56093313-56988215
+28/Jul/2026:16:16:44.271055 a17fab51 Range=bytes=39176372-40067155 Recieved
+Thread for range[44,45] completed | maxWorkers: 2| Latency: 0.0482s 
+Thread for range[95,96] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[100,101] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[108,109] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[113,114] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[136,137] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[149,150] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[166,167] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[179,180] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[200,201] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[210,211] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[220,221] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[229,230] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[239,240] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[250,251] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[255,256] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[266,267] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[308,309] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[318,319] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[328,329] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[337,338] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[373,374] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[406,407] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[411,412] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[414,415] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[417,418] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[422,423] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[426,427] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[452,453] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[507,508] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[512,513] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[533,534] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[537,538] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[563,564] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[594,595] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[600,601] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[610,611] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[613,614] completed | maxWorkers: 2| Latency: 0.0000s 
+Thread for range[618,619] completed | maxWorkers: 2| Latency: 0.0000s 
+28/Jul/2026:16:16:44.530658 669e4234 Range=bytes=56093313-56988215 Recieved
+Thread for range[63,64] completed | maxWorkers: 2| Latency: 0.3140s 
+28/Jul/2026:16:16:44.553208 79228f12 Range=bytes=39176372-40067155
+28/Jul/2026:16:16:44.553925 06066efb Range=bytes=56093313-56988215
+Thread for range[136,137] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[108,109] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[95,96] completed | maxWorkers: 5| Latency: 0.0001s 
+Thread for range[149,150] completed | maxWorkers: 5| Latency: 0.0001s 
+Thread for range[100,101] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[113,114] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[200,201] completed | maxWorkers: 5| Latency: 0.0000s 
+28/Jul/2026:16:16:44.595194 06066efb Range=bytes=56093313-56988215 Recieved
+Thread for range[210,211] completed | maxWorkers: 5| Latency: 0.0000s 
+28/Jul/2026:16:16:44.600281 79228f12 Range=bytes=39176372-40067155 Recieved
+Thread for range[220,221] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[229,230] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[239,240] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[250,251] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[255,256] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[266,267] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[308,309] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[318,319] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[328,329] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[337,338] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[373,374] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[406,407] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[411,412] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[414,415] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[417,418] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[422,423] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[426,427] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[452,453] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[507,508] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[512,513] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[533,534] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[537,538] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[563,564] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[594,595] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[600,601] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[610,611] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[613,614] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[618,619] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[166,167] completed | maxWorkers: 5| Latency: 0.0001s 
+Thread for range[179,180] completed | maxWorkers: 5| Latency: 0.0000s 
+Thread for range[63,64] completed | maxWorkers: 5| Latency: 0.0518s 
+Thread for range[44,45] completed | maxWorkers: 5| Latency: 0.0568s 
+28/Jul/2026:16:16:44.726413 a62500a8 Range=bytes=39176372-40067155
+28/Jul/2026:16:16:44.727622 5f11ead3 Range=bytes=56093313-56988215
+Thread for range[533,534] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[537,538] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[452,453] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[255,256] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[426,427] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[250,251] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[95,96] completed | maxWorkers: 10| Latency: 0.0002s 
+Thread for range[563,564] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[422,423] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[239,240] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[417,418] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[229,230] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[136,137] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[414,415] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[220,221] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[512,513] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[411,412] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[210,211] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[100,101] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[406,407] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[113,114] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[373,374] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[200,201] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[337,338] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[179,180] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[507,508] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[328,329] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[318,319] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[266,267] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[108,109] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[166,167] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[308,309] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[600,601] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[149,150] completed | maxWorkers: 10| Latency: 0.0001s 
+Thread for range[594,595] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[610,611] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[613,614] completed | maxWorkers: 10| Latency: 0.0000s 
+Thread for range[618,619] completed | maxWorkers: 10| Latency: 0.0000s 
+28/Jul/2026:16:16:45.187499 5f11ead3 Range=bytes=56093313-56988215 Recieved
+28/Jul/2026:16:16:45.188113 a62500a8 Range=bytes=39176372-40067155 Recieved
+Thread for range[63,64] completed | maxWorkers: 10| Latency: 0.4756s 
+Thread for range[44,45] completed | maxWorkers: 10| Latency: 0.4763s 
+28/Jul/2026:16:16:45.214703 f968069e Range=bytes=39176372-40067155
+28/Jul/2026:16:16:45.215545 12243d4a Range=bytes=56093313-56988215
+Thread for range[452,453] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[426,427] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[255,256] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[422,423] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[250,251] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[136,137] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[417,418] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[239,240] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[414,415] completed | maxWorkers: 15| Latency: 0.0001s 
+Thread for range[411,412] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[229,230] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[406,407] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[210,211] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[113,114] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[373,374] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[200,201] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[95,96] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[100,101] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[610,611] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[337,338] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[179,180] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[600,601] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[328,329] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[266,267] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[149,150] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[594,595] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[318,319] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[166,167] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[563,564] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[308,309] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[537,538] completed | maxWorkers: 15| Latency: 0.0000s 
+28/Jul/2026:16:16:45.457880 12243d4a Range=bytes=56093313-56988215 Recieved
+Thread for range[533,534] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[108,109] completed | maxWorkers: 15| Latency: 0.0001s 
+28/Jul/2026:16:16:45.499526 f968069e Range=bytes=39176372-40067155 Recieved
+Thread for range[512,513] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[220,221] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[507,508] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[613,614] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[618,619] completed | maxWorkers: 15| Latency: 0.0000s 
+Thread for range[63,64] completed | maxWorkers: 15| Latency: 0.2528s 
+Thread for range[44,45] completed | maxWorkers: 15| Latency: 0.2951s 
+28/Jul/2026:16:16:45.519354 dc9cf41d Range=bytes=39176372-40067155
+28/Jul/2026:16:16:45.519935 965451e9 Range=bytes=56093313-56988215
+Thread for range[422,423] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[426,427] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[179,180] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[266,267] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[149,150] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[452,453] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[166,167] completed | maxWorkers: 20| Latency: 0.0001s 
+Thread for range[600,601] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[373,374] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[100,101] completed | maxWorkers: 20| Latency: 0.0000s 
+28/Jul/2026:16:16:45.560672 965451e9 Range=bytes=56093313-56988215 Recieved
+Thread for range[594,595] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[95,96] completed | maxWorkers: 20| Latency: 0.0001s 
+Thread for range[417,418] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[108,109] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[255,256] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[113,114] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[250,251] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[318,319] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[308,309] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[239,240] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[414,415] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[229,230] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[563,564] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[328,329] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[220,221] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[200,201] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[210,211] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[337,338] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[537,538] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[533,534] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[406,407] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[512,513] completed | maxWorkers: 20| Latency: 0.0000s 
+28/Jul/2026:16:16:45.613408 dc9cf41d Range=bytes=39176372-40067155 Recieved
+Thread for range[411,412] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[136,137] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[507,508] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[610,611] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[613,614] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[618,619] completed | maxWorkers: 20| Latency: 0.0000s 
+Thread for range[63,64] completed | maxWorkers: 20| Latency: 0.0515s 
+Thread for range[44,45] completed | maxWorkers: 20| Latency: 0.1064s 
+28/Jul/2026:16:16:45.643017 63e93207 Range=bytes=39176372-40067155
+28/Jul/2026:16:16:45.644102 7d848844 Range=bytes=56093313-56988215
+Thread for range[600,601] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[411,412] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[108,109] completed | maxWorkers: 25| Latency: 0.0001s 
+Thread for range[406,407] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[166,167] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[113,114] completed | maxWorkers: 25| Latency: 0.0001s 
+Thread for range[255,256] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[373,374] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[250,251] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[337,338] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[328,329] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[239,240] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[594,595] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[318,319] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[220,221] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[95,96] completed | maxWorkers: 25| Latency: 0.0001s 
+Thread for range[563,564] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[308,309] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[210,211] completed | maxWorkers: 25| Latency: 0.0001s 
+Thread for range[537,538] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[200,201] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[414,415] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[533,534] completed | maxWorkers: 25| Latency: 0.0000s 
+28/Jul/2026:16:16:45.693465 7d848844 Range=bytes=56093313-56988215 Recieved
+Thread for range[266,267] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[512,513] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[179,180] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[149,150] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[507,508] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[452,453] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[426,427] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[100,101] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[136,137] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[422,423] completed | maxWorkers: 25| Latency: 0.0001s 
+Thread for range[229,230] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[417,418] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[610,611] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[613,614] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[618,619] completed | maxWorkers: 25| Latency: 0.0000s 
+Thread for range[63,64] completed | maxWorkers: 25| Latency: 0.0612s 
+28/Jul/2026:16:16:46.083109 63e93207 Range=bytes=39176372-40067155 Recieved
+Thread for range[44,45] completed | maxWorkers: 25| Latency: 0.4530s 
+28/Jul/2026:16:16:46.102824 f82d2f64 Range=bytes=39176372-40067155
+28/Jul/2026:16:16:46.103788 dfd9e17a Range=bytes=56093313-56988215
+Thread for range[255,256] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[512,513] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[328,329] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[507,508] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[210,211] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[452,453] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[337,338] completed | maxWorkers: 30| Latency: 0.0000s 
+28/Jul/2026:16:16:46.144499 f82d2f64 Range=bytes=39176372-40067155 Recieved
+Thread for range[426,427] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[100,101] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[149,150] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[422,423] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[113,114] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[308,309] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[108,109] completed | maxWorkers: 30| Latency: 0.0001s 
+Thread for range[610,611] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[200,201] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[600,601] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[220,221] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[179,180] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[594,595] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[318,319] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[266,267] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[250,251] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[229,230] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[563,564] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[166,167] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[537,538] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[417,418] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[239,240] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[414,415] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[533,534] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[411,412] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[406,407] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[95,96] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[136,137] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[373,374] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[613,614] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[618,619] completed | maxWorkers: 30| Latency: 0.0000s 
+Thread for range[44,45] completed | maxWorkers: 30| Latency: 0.0501s 
+28/Jul/2026:16:16:46.405315 dfd9e17a Range=bytes=56093313-56988215 Recieved
+Thread for range[63,64] completed | maxWorkers: 30| Latency: 0.3140s 

@@ -1,0 +1,61 @@
+maxWorkers,chunkSize,StartIndex,Status,Error,EndClock,Latency
+1,5,27,success,None,21/Jul/2026:10:58:46.529326,4.994084000005387
+1,5,70,success,None,21/Jul/2026:10:58:52.708946,6.1778494579775725
+1,5,134,success,None,21/Jul/2026:10:58:55.813391,3.102582708001137
+1,5,184,success,None,21/Jul/2026:10:59:00.351205,4.537410958000692
+1,5,203,success,None,21/Jul/2026:10:59:04.526189,4.173075040976983
+1,5,221,success,None,21/Jul/2026:10:59:09.983781,5.456563499988988
+1,5,237,success,None,21/Jul/2026:10:59:13.712037,3.727447500015842
+1,5,297,success,None,21/Jul/2026:10:59:19.637698,5.9246604579966515
+1,5,361,success,None,21/Jul/2026:10:59:24.928889,5.289402416994562
+1,5,407,success,None,21/Jul/2026:10:59:28.007240,3.077951374987606
+2,5,27,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:28.885337,0.8748085830011405
+2,5,70,failed,Error -3 while decompressing data: incorrect header check,21/Jul/2026:10:59:28.941685,0.9308242079860065
+2,5,184,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:29.169513,0.2276642500073649
+2,5,134,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:30.104634,1.2189582500141114
+2,5,221,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:30.898197,0.7923745420121122
+2,5,203,failed,Error -3 while decompressing data: incorrect header check,21/Jul/2026:10:59:31.356396,2.186709207977401
+2,5,237,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:32.199856,1.3012864159827586
+2,5,361,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:33.756825,1.5560778329963796
+2,5,297,failed,Error -3 while decompressing data: incorrect header check,21/Jul/2026:10:59:33.859051,2.5017862920067273
+2,5,407,success,None,21/Jul/2026:10:59:37.711134,3.9535700830165297
+5,5,70,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:39.219970,1.5055328749876935
+5,5,203,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:39.316460,1.6015816669969354
+5,5,134,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:39.413154,1.6985728750005364
+5,5,27,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:39.447891,1.7337705839890987
+5,5,184,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:39.623932,1.909179749985924
+5,5,237,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:39.993717,0.677066250005737
+5,5,361,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:40.488633,1.0402850420214236
+5,5,407,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:41.143728,1.5195371250156313
+5,5,221,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:41.429220,2.208915875002276
+5,5,297,failed,Error -3 while decompressing data: incorrect header check,21/Jul/2026:10:59:41.590630,2.177269709005486
+10,5,27,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:42.762719,1.170581874990603
+10,5,221,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:43.262929,1.6697806250012945
+10,5,203,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:43.388169,1.7952829170098994
+10,5,134,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:44.274248,2.681608624989167
+10,5,407,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:44.352093,2.758193958987249
+10,5,237,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:44.438424,2.8450627499842085
+10,5,184,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:44.549131,2.9563555830100086
+10,5,70,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:44.577870,2.9853428339993116
+10,5,297,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:45.139726,3.546125041990308
+10,5,361,failed,Error -3 while decompressing data: incorrect header check,21/Jul/2026:10:59:46.365622,4.771832250000443
+15,5,361,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:47.294668,0.9238901249773335
+15,5,70,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:47.382056,1.0135620840010233
+15,5,407,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:47.401395,1.030430000013439
+15,5,184,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:47.651813,1.2826203749864362
+15,5,297,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:47.856843,1.4864523340074811
+15,5,203,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:47.938024,1.5686791249900125
+15,5,27,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:47.960303,1.592073750012787
+15,5,221,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:48.069024,1.6992286249878816
+15,5,237,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:48.077793,1.7077392919745762
+15,5,134,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:48.110416,1.7413974170049187
+20,5,361,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:49.408057,1.2882040000113193
+20,5,70,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:49.562364,1.4436736670031678
+20,5,221,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:49.584470,1.4651565829990432
+20,5,134,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:49.690295,1.571415500016883
+20,5,297,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:50.119393,1.9997002080199309
+20,5,237,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:50.208715,2.089200124988565
+20,5,203,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:50.237889,2.1186588749988005
+20,5,184,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:50.263085,2.1441061249934137
+20,5,407,failed,Error -5 while decompressing data: incomplete or truncated stream,21/Jul/2026:10:59:50.532805,2.4128605839796364
+20,5,27,failed,Error -3 while decompressing data: incorrect header check,21/Jul/2026:10:59:50.662545,2.5441857920086477
